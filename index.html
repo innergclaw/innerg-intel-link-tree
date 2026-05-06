@@ -12,20 +12,23 @@
 
     :root {
       --bg: #040404;
-      --panel: rgba(10, 14, 10, 0.9);
-      --panel-2: rgba(14, 18, 14, 0.96);
-      --line: rgba(0, 255, 65, 0.24);
-      --primary: #00ff41;
-      --primary-dim: #00b833;
-      --secondary: #ffbf00;
-      --text: #e8f3e8;
-      --muted: #93a193;
+      --panel: rgba(12, 14, 18, 0.9);
+      --panel-2: rgba(16, 18, 24, 0.96);
+      --line: rgba(0, 255, 163, 0.22);
+      --primary: #00f5a0;
+      --primary-dim: #00b878;
+      --secondary: #ff7a18;
+      --text: #eef8f4;
+      --muted: #9aa6a0;
       --danger: #ff5d5d;
     }
 
     body {
       font-family: 'Share Tech Mono', monospace;
-      background: radial-gradient(circle at top, rgba(0,255,65,0.08), transparent 35%), #000;
+      background:
+        radial-gradient(circle at top, rgba(255,122,24,0.14), transparent 26%),
+        radial-gradient(circle at 50% 0%, rgba(0,245,160,0.12), transparent 38%),
+        #000;
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
@@ -104,14 +107,20 @@
       padding: 8px 0 34px;
     }
 
-    .title {
-      font-family: 'Bungee Shade', cursive;
-      color: var(--secondary);
-      font-size: clamp(2.3rem, 6vw, 4.6rem);
-      line-height: 1.02;
-      letter-spacing: 2px;
-      text-shadow: 0 0 18px rgba(255,191,0,0.3);
-      margin-bottom: 18px;
+    .hero-logo {
+      width: min(100%, 760px);
+      margin: 0 auto 18px;
+      padding: 18px 18px 14px;
+      border: 1px solid rgba(0, 245, 160, 0.22);
+      background: linear-gradient(180deg, rgba(255,122,24,0.06), rgba(0,245,160,0.05));
+      box-shadow: 0 0 26px rgba(0,245,160,0.12), inset 0 0 18px rgba(255,122,24,0.05);
+    }
+
+    .hero-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 16px rgba(0,245,160,0.18));
     }
 
     .hero-tag {
@@ -321,7 +330,9 @@
     </div>
 
     <section class="hero">
-      <div class="title">INNERG INTEL LINK TREE</div>
+      <div class="hero-logo">
+        <img src="assets/innerg-intel-link-tree-logo.png" alt="InnerG Intel Link Tree logo">
+      </div>
       <div class="hero-tag"><span class="dot"></span> AI EDUCATION • SYSTEMS • SERVICES</div>
       <p class="hero-copy">Direct access to InnerG Intel offers, program enrollment, setup sessions, and ecosystem entry points. Clean links. Clear offers. No extra noise.</p>
     </section>
