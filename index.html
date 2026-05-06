@@ -88,20 +88,6 @@
       gap: 10px;
     }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--primary);
-      box-shadow: 0 0 12px var(--primary);
-      animation: pulse 1.8s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.55; transform: scale(0.88); }
-    }
-
     .hero {
       text-align: center;
       padding: 8px 0 16px;
@@ -325,7 +311,7 @@
 <body>
   <main class="wrap">
     <div class="topbar">
-      <div class="status"><span class="dot"></span> INNERG INTEL SYSTEM ONLINE</div>
+      <div class="status">INNERG INTEL SYSTEM ONLINE</div>
       <div>www.innergeco.online</div>
     </div>
 
@@ -333,7 +319,8 @@
       <div class="hero-logo">
         <img src="assets/innerg-intel-link-tree-logo.png" alt="InnerG Intel Link Tree logo">
       </div>
-      <div class="hero-tag"><span class="dot"></span> AI EDUCATION • SYSTEMS • SERVICES</div>
+      <div class="hero-tag">AI EDUCATION • SYSTEMS • SERVICES</div>
+      <a class="btn secondary" href="https://innergclaw.github.io/innerg-ai-program-signup/" target="_blank" rel="noopener" style="margin-bottom: 18px;">Learn More About InnerG Intel Program</a>
       <p class="hero-copy">Direct access to InnerG Intel offers, program enrollment, setup sessions, and ecosystem entry points. Clean links. Clear offers. No extra noise.</p>
     </section>
 
