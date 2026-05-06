@@ -3,438 +3,430 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INNERG INTEL — Become Intelligence</title>
+  <title>INNERG INTEL LINK TREE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #000000;
+      --bg: #040404;
+      --panel: rgba(10, 14, 10, 0.9);
+      --panel-2: rgba(14, 18, 14, 0.96);
+      --line: rgba(0, 255, 65, 0.24);
       --primary: #00ff41;
-      --primary-dim: #00aa2a;
+      --primary-dim: #00b833;
       --secondary: #ffbf00;
-      --red: #ff3333;
-      --text: #e0e0e0;
-      --text-muted: #888888;
-      --border: #00aa2a;
-      --panel: #0a0a0a;
+      --text: #e8f3e8;
+      --muted: #93a193;
+      --danger: #ff5d5d;
     }
-    
+
     body {
       font-family: 'Share Tech Mono', monospace;
-      background: var(--bg);
+      background: radial-gradient(circle at top, rgba(0,255,65,0.08), transparent 35%), #000;
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
     }
-    
-    /* Grid Background */
+
     body::before {
       content: '';
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(0, 255, 65, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 65, 0.08) 1px, transparent 1px);
-      background-size: 60px 60px;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,65,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
       pointer-events: none;
       z-index: 0;
     }
-    
-    /* Scanline */
+
     body::after {
       content: '';
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: repeating-linear-gradient(
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 65, 0.03) 2px,
-        rgba(0, 255, 65, 0.03) 4px
+        rgba(0,255,65,0.025) 2px,
+        rgba(0,255,65,0.025) 4px
       );
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
       z-index: 1;
-    }
-    
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 1200px;
+      width: min(100%, 880px);
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 28px 18px 64px;
     }
-    
-    /* LED */
-    .led {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: var(--primary);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--primary);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--primary); }
-      50% { opacity: 0.5; box-shadow: 0 0 5px var(--primary); }
-    }
-    
-    /* NAV */
-    nav {
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    
-    nav .container {
+
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
+      gap: 16px;
+      padding: 12px 0 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 4px;
     }
-    
-    .logo span {
-      color: var(--secondary);
-    }
-    
-    .nav-status {
-      display: flex;
+
+    .status {
+      display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 2px;
     }
-    
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 12px var(--primary);
+      animation: pulse 1.8s infinite ease-in-out;
     }
-    
-    .nav-link {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: color 0.3s;
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(0.88); }
     }
-    
-    .nav-link:hover {
-      color: var(--primary);
-    }
-    
-    /* HERO */
+
     .hero {
-      padding: 5rem 0;
       text-align: center;
-      border-bottom: 1px solid var(--border);
+      padding: 8px 0 34px;
     }
-    
+
+    .title {
+      font-family: 'Bungee Shade', cursive;
+      color: var(--secondary);
+      font-size: clamp(2.3rem, 6vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: 2px;
+      text-shadow: 0 0 18px rgba(255,191,0,0.3);
+      margin-bottom: 18px;
+    }
+
     .hero-tag {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.8rem;
       color: var(--secondary);
+      font-size: 0.78rem;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 18px;
     }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: 4px;
+
+    .hero-copy {
+      width: min(100%, 620px);
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
     }
-    
-    .hero h1 span {
-      color: var(--primary);
-      text-shadow: 0 0 30px var(--primary);
+
+    .stack {
+      display: grid;
+      gap: 22px;
     }
-    
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
+
+    .section-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(0,255,65,0.05), rgba(8,8,8,0.96));
+      padding: 22px;
+      box-shadow: 0 0 22px rgba(0,255,65,0.08);
     }
-    
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 1rem 2.5rem;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-decoration: none;
-      border: 1px solid;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .btn-primary {
-      background: transparent;
-      color: var(--primary);
-      border-color: var(--primary);
-    }
-    
-    .btn-primary:hover {
-      background: var(--primary);
-      color: var(--bg);
-      box-shadow: 0 0 30px var(--primary);
-    }
-    
-    .btn-secondary {
-      background: transparent;
-      color: var(--secondary);
-      border-color: var(--secondary);
-    }
-    
-    .btn-secondary:hover {
-      background: var(--secondary);
-      color: var(--bg);
-      box-shadow: 0 0 30px var(--secondary);
-    }
-    
-    /* SECTIONS */
-    section {
-      padding: 5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .section-header {
+
+    .section-head {
+      margin-bottom: 18px;
       text-align: center;
-      margin-bottom: 3rem;
     }
-    
-    .section-tag {
-      font-size: 0.8rem;
+
+    .section-kicker {
       color: var(--secondary);
+      font-size: 0.76rem;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 8px;
     }
-    
+
     .section-title {
-      font-size: 2.5rem;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 1rem;
     }
-    
+
     .section-title span {
       color: var(--primary);
+      text-shadow: 0 0 14px rgba(0,255,65,0.28);
     }
-    
-    /* FEATURES GRID */
-    .features-grid {
+
+    .link-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      gap: 14px;
     }
-    
-    .feature-card {
-      border: 1px solid var(--border);
-      padding: 2rem;
+
+    .link-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid rgba(0,255,65,0.18);
       background: var(--panel);
-      transition: all 0.3s;
+      padding: 18px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    
-    .feature-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+
+    .link-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,255,65,0.42);
+      box-shadow: 0 0 18px rgba(0,255,65,0.12);
     }
-    
-    .feature-card h3 {
-      font-size: 1.1rem;
-      color: var(--secondary);
-      margin-bottom: 0.75rem;
+
+    .link-meta h3 {
+      color: var(--text);
+      font-size: 1rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-bottom: 6px;
     }
-    
-    .feature-card p {
+
+    .link-meta p {
+      color: var(--muted);
       font-size: 0.9rem;
-      color: var(--text-muted);
       line-height: 1.6;
     }
-    
-    /* JOIN PANEL */
-    .join-panel {
-      text-align: center;
-      padding: 4rem;
-      border: 1px solid var(--border);
-      background: var(--panel);
+
+    .price {
+      display: inline-block;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+      text-shadow: 0 0 12px rgba(0,255,65,0.28);
     }
-    
-    .join-panel h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      padding: 14px 18px;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-    
-    .join-panel p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    /* FOOTER */
-    footer {
-      padding: 3rem 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
       letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 0.82rem;
+      background: transparent;
+      transition: all 0.2s ease;
     }
-    
-    /* MOBILE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
+
+    .btn:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 18px rgba(0,255,65,0.25);
+    }
+
+    .btn.secondary {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    .btn.secondary:hover {
+      background: var(--secondary);
+      color: #000;
+      box-shadow: 0 0 18px rgba(255,191,0,0.2);
+    }
+
+    .btn.disabled {
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.45);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .micro-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+    }
+
+    .claw-shell {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(0,255,65,0.08), rgba(8, 16, 10, 0.95));
+    }
+
+    .claw-shell::before,
+    .claw-shell::after {
+      position: absolute;
+      color: var(--primary);
+      font-size: 2rem;
+      text-shadow: 0 0 14px rgba(0,255,65,0.45);
+      opacity: 0.8;
+    }
+
+    .claw-shell::before {
+      content: '⟪ ⟪';
+      left: 12px;
+      top: 10px;
+    }
+
+    .claw-shell::after {
+      content: '⟫ ⟫';
+      right: 12px;
+      bottom: 10px;
+    }
+
+    .footer {
+      padding-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 740px) {
+      .topbar {
+        flex-direction: column;
       }
-      
-      .section-title {
-        font-size: 1.5rem;
-      }
-      
-      .features-grid {
+
+      .link-item {
         grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+        min-width: 0;
       }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="container">
-      <div class="logo">INNERG<span>.</span></div>
-      <div class="nav-links">
-        <a href="https://innergclaw.github.io/innerg-ai-program-signup/" class="nav-link">AI PROGRAM</a>
-        <a href="#join" class="nav-link">ACCESS</a>
-      </div>
-      <div class="nav-status">
-        <span class="led"></span>
-        SYSTEM ONLINE
-      </div>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="status"><span class="dot"></span> INNERG INTEL SYSTEM ONLINE</div>
+      <div>www.innergeco.online</div>
     </div>
-  </nav>
-  
-  <section class="hero">
-    <div class="container">
-      <div class="hero-tag">
-        <span class="led"></span>
-        AI EDUCATION & DIGITAL STRATEGY
-      </div>
-      <h1>BECOME<br><span>INTELLIGENCE</span></h1>
-      <p>Master AI. Build systems. Operate at the intersection of creativity and technology. InnerG Intel is where strategists learn to think in systems.</p>
-      <div class="cta-group">
-        <a href="#join" class="btn btn-primary">Access The System</a>
-        <a href="#about" class="btn btn-secondary">Learn More</a>
-      </div>
+
+    <section class="hero">
+      <div class="title">INNERG INTEL LINK TREE</div>
+      <div class="hero-tag"><span class="dot"></span> AI EDUCATION • SYSTEMS • SERVICES</div>
+      <p class="hero-copy">Direct access to InnerG Intel offers, program enrollment, setup sessions, and ecosystem entry points. Clean links. Clear offers. No extra noise.</p>
+    </section>
+
+    <div class="stack">
+      <section class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">[ AI PROGRAM LINKS ]</div>
+          <h2 class="section-title">InnerG AI Program <span>2026</span></h2>
+        </div>
+        <div class="link-grid">
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$125</span>
+              <h3>Foundation • Weeks 1–4</h3>
+              <p>Start here with the first 4-week block of the InnerG AI Program.</p>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/3cI28tdoz3i1gFMbubao80K" target="_blank" rel="noopener">Open Link</a>
+          </div>
+
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$125</span>
+              <h3>Exploration • Weeks 5–8</h3>
+              <p>Continue into the next phase with deeper hands-on AI exploration.</p>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/4gM28tckvbOx3T0eGnao80L" target="_blank" rel="noopener">Open Link</a>
+          </div>
+
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$125</span>
+              <h3>Application • Weeks 9–12</h3>
+              <p>Apply the tools in real-world workflows, prompts, and systems.</p>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/00w8wR3NZ7yhcpwbubao80M" target="_blank" rel="noopener">Open Link</a>
+          </div>
+
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$125</span>
+              <h3>Readiness • Weeks 13–16</h3>
+              <p>Prepare for confident, practical AI use with guided execution.</p>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/bJeaEZ84f8Cl4X48hZao80N" target="_blank" rel="noopener">Open Link</a>
+          </div>
+
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$400</span>
+              <h3>Full Program • 18 Weeks</h3>
+              <p>The full InnerG AI Program path with the complete experience in one link.</p>
+            </div>
+            <a class="btn secondary" href="https://buy.stripe.com/14AaEZbgrf0Jaho9m3ao80O" target="_blank" rel="noopener">Open Link</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card claw-shell">
+        <div class="section-head">
+          <div class="section-kicker">[ OPENCLAW • INNERG WAY ]</div>
+          <h2 class="section-title">OpenClaw Setup <span>Services</span></h2>
+        </div>
+        <div class="link-grid">
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$250</span>
+              <h3>OpenClaw Setup Session • Zoom</h3>
+              <p>Beginner-friendly live setup and walkthrough done the InnerG Way for new users who want guided support.</p>
+              <div class="micro-note">Live remote install • walkthrough • Q&amp;A</div>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/7sY4gB84f3i175ccyfao80P" target="_blank" rel="noopener">Open Link</a>
+          </div>
+
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$500</span>
+              <h3>OpenClaw Setup Session • In Person</h3>
+              <p>White-glove on-site OpenClaw installation, configuration, and hands-on walkthrough done live.</p>
+              <div class="micro-note">White-glove install • on-site guidance • hands-on setup</div>
+            </div>
+            <a class="btn secondary" href="https://buy.stripe.com/00wdRbfwH7yhgFM2XFao80Q" target="_blank" rel="noopener">Open Link</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">[ ECOSYSTEM ACCESS ]</div>
+          <h2 class="section-title">Entry <span>Point</span></h2>
+        </div>
+        <div class="link-grid">
+          <div class="link-item">
+            <div class="link-meta">
+              <span class="price">$15</span>
+              <h3>Request Access</h3>
+              <p>Access request link for joining the system and getting into the InnerG ecosystem.</p>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/aFa28t70bbOxfBI7dVao80I" target="_blank" rel="noopener">Open Link</a>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
-  
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">[ SYSTEM OVERVIEW ]</div>
-        <h2 class="section-title">WHAT IS <span>INNERG</span>?</h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>AI EDUCATION</h3>
-          <p>Learn to leverage AI as a force multiplier. From prompt engineering to full system automation.</p>
-        </div>
-        <div class="feature-card">
-          <h3>DIGITAL STRATEGY</h3>
-          <p>Build businesses and brands that operate 24/7. Systems over hustle.</p>
-        </div>
-        <div class="feature-card">
-          <h3>CREATIVE EXECUTION</h3>
-          <p>Where vision meets technical capability. Design, build, deploy.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="features">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">[ CORE MODULES ]</div>
-        <h2 class="section-title">SYSTEM <span>COMPONENTS</span></h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>DISCORD ACCESS</h3>
-          <p>Private community of operators, builders, and strategists.</p>
-        </div>
-        <div class="feature-card">
-          <h3>1-ON-1 CLASSES</h3>
-          <p>Personalized AI training sessions tailored to your goals.</p>
-        </div>
-        <div class="feature-card">
-          <h3>WORKSHOPS</h3>
-          <p>Hands-on sessions building real systems and automations.</p>
-        </div>
-        <div class="feature-card">
-          <h3>RESOURCES</h3>
-          <p>Prompts, templates, and systems ready to deploy.</p>
-        </div>
-        <div class="feature-card">
-          <h3>ECOSYSTEM</h3>
-          <p>Connected tools, agents, and platforms for execution.</p>
-        </div>
-        <div class="feature-card">
-          <h3>SUPPORT</h3>
-          <p>Direct access to the InnerG team for guidance.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="join">
-    <div class="container">
-      <div class="join-panel">
-        <div class="section-tag">[ ACCESS REQUEST ]</div>
-        <h2>JOIN THE <span>SYSTEM</span></h2>
-        <p>Applications open. We're selective about who joins — quality over quantity.</p>
-        <a href="https://buy.stripe.com/aFa28t70bbOxfBI7dVao80I" class="btn btn-primary">Request Access ($15)</a>
-      </div>
-    </div>
-  </section>
-  
-  <footer>
-    <div class="container">
-      <p>© 2026 INNERG INTEL — ALL SYSTEMS OPERATIONAL</p>
-    </div>
-  </footer>
+
+    <div class="footer">© 2026 INNERG INTEL — ALL SYSTEMS OPERATIONAL</div>
+  </main>
 </body>
 </html>
